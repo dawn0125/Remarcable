@@ -1,6 +1,19 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1><i>You searched for ... </i></h1>
+<center>
+    {% if searched %}
+    <h1>You searched for <i> {{ searched }} </i></h1>
+    {% else %}
+    <h1>You did not search for anything</h1>
+    {% endif %}
+</center>
 
+<u1>
+    {% for product in products %}
+    <li>
+        {{product.name}}, {{product.category.name}}
+    </li>
+    {% endfor %}
+</u1>
 {% endblock %}
