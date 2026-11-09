@@ -12,5 +12,5 @@ def products(request):
     products = Product.objects.all()
     return render(request, "products.html", {"products": products})
 
-def search_products(request):
-    return 0 
+def search(request):
+    return render(request, "search_page.html", {})
