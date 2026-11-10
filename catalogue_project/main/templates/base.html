@@ -20,17 +20,29 @@
             <a class="nav-link" href="{% url 'home' %}">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{% url 'products' %}">Products</a>
-          </li>
-          <li class="nav-item">
             <a class="nav-link" href="#">Contact</a>
           </li>
         </ul>
 
         <!-- Right side of nav bar-->
          <!-- Filter -->
-        <a href = "#" class="text-light mr-2" style="text-decoration: underline;"> Filter </a>
-        <!-- Search -->
+        <span class="text-light mr-2" style="text-decoration: underline;"> Filters: </span>
+        <!-- Category Filter -->
+        <form method = "GET">
+          <select name = "categories" id = "categories" onchange="this.form.submit()">
+            <option value = "">Categories</option>
+            {% for cat in all_categories %}
+              <option value = "{{ cat.pk }}"> {{cat.name}} </option>
+            {% endfor %}
+          </select>
+        </form>
+        <!-- Tag Filter -->
+        <select name="tags" size="1" multiple>
+          {% for tag in all_tags %}
+            <option value = "{{ tag.pk }}"> {{tag.name}} </option>
+          {% endfor %}
+      </select>
+        <!-- Search Bar -->
         <form class = "d-flex" method="post" action="{% url 'search' %}">
           {% csrf_token %}
           <input class = "form-control-me-2"

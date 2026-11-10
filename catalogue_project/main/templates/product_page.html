@@ -7,7 +7,7 @@
 <p> {{product.description}} </p>
 
 <h4> Category: {{product.category.name}} </h4>
-<h4> Tags </h4>
+<h4> Tags: </h4>
 {% for tag in product.tags.all %}
     <li> {{tag}} </li>
 {% endfor %}

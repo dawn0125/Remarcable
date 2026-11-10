@@ -1,17 +1,18 @@
 from django.shortcuts import render, HttpResponse, get_object_or_404
 from django.db.models import Q
 from .models import Product
+from .filters import ProductFilter
 
 # Create your views here.
 def home(request):
     """home page"""
     products = Product.objects.all()
-    return render(request, "home.html", {"products" : products})
 
-def products(request):
-    """page for displaying all products"""
-    products = Product.objects.all()
-    return render(request, "home.html", {"products": products})
+    # filter data if there is any applied
+    # productFilter = productFilter(request.GET, queryset = products)
+    # products = productFilter.qs
+
+    return render(request, "home.html", {"products" : products})
 
 def search(request):
     """search page"""
