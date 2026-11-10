@@ -2,7 +2,7 @@
 <u1>
     {% for product in products %}
     <li>
-        {{product.name}}, {{product.category.name}}
+        <a href="{% url 'product_detail' product.pk %}"> {{product.name}} </a> <u1>: {{product.description}} </u1>
     </li>
     {% endfor %}
 </u1>
