@@ -5,12 +5,13 @@ from .models import Product
 # Create your views here.
 def home(request):
     """home page"""
-    return render(request, "home.html")
+    products = Product.objects.all()
+    return render(request, "home.html", {"products" : products})
 
 def products(request):
     """page for displaying all products"""
     products = Product.objects.all()
-    return render(request, "products.html", {"products": products})
+    return render(request, "home.html", {"products": products})
 
 def search(request):
     """search page"""

@@ -10,13 +10,7 @@
 </center>
 
 {% if products %}
-<u1>
-    {% for product in products %}
-    <li>
-        {{product.name}}, {{product.category.name}}
-    </li>
-    {% endfor %}
-</u1>
+{% include "product_list.html" %}
 {% else %}
 <u1> No products found in search </u1>
 {% endif %}
