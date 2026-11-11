@@ -27,4 +27,4 @@ This is a beauty store page where you can scroll through various products found 
 A user can filter by the category or tags in the navigation bar, and also search for words found in the name or description of a product. Filter and search features can be used together. 
 
 ## AI Usage ##
-AI was used as a search engine for some features of Django which were new to me. All code was written by me.
+AI was used as a search engine for some features of Django which were new to me, and with some HTML conventions (this was my first time using HTML). All code was written by me.
