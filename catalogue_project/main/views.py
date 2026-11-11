@@ -18,9 +18,7 @@ def search(request):
     """search page"""
     if request.method == "GET":
         searched = request.GET['searched']
-        # search product objects for if their name, category, tags,
-        # or description contains the string searched
-        # filter data if there is any applied
+        # search product objects for if their name or description contains search string
         products = Product.objects.filter(Q(name__icontains=searched) |
                                           Q(description__icontains=searched))
         
@@ -28,6 +26,7 @@ def search(request):
         searched = {}
         products = {}
 
+    # filter data if filter applied
     productFilter = ProductFilter(request.GET, queryset = products)
     products = productFilter.qs
     return render(request, "search_page.html", {"searched" : searched,
