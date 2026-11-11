@@ -26,27 +26,37 @@
 
         <!-- Right side of nav bar-->
          <!-- Filter -->
-        <span class="text-light mr-2" style="text-decoration: underline;"> Filters: </span>
-        <!-- Category Filter -->
-        <form method = "GET">
-          <select name = "categories" id = "categories" onchange="this.form.submit()">
-            <option value = "">Categories</option>
+         <form method = "GET">
+          <!-- Keep search values if searched -->
+          {% if searched %} <input type = "hidden" name = "searched" value = "{{searched}}"> {% endif %}
+          <!-- Category Filter -->
+          <select name = "category" id = "category">
+            <span class="text-light mr-2"> Category </span>
+            <option value = "">Category</option>
             {% for cat in all_categories %}
               <option value = "{{ cat.pk }}"> {{cat.name}} </option>
             {% endfor %}
           </select>
+          <!-- Tag Filter -->
+          <span class="text-light mr-2"> Tags </span>
+          <select name="tags" id = "tags" size="1" multiple>
+            {% for tag in all_tags %}
+              <option value = "{{ tag.pk }}"> {{tag.name}} </option>
+            {% endfor %}
+          </select>
+          <button type="submit" class="btn-outline-secondary">Filter</button>
         </form>
-        <!-- Tag Filter -->
-        <select name="tags" size="1" multiple>
-          {% for tag in all_tags %}
-            <option value = "{{ tag.pk }}"> {{tag.name}} </option>
-          {% endfor %}
-      </select>
         <!-- Search Bar -->
-        <form class = "d-flex" method="post" action="{% url 'search' %}">
-          {% csrf_token %}
-          <input class = "form-control-me-2"
-          type = "search" placeholder="Search" aria-label="Search" name = "searched">
+        <form class = "d-flex" method="GET" action="{% url 'search' %}">
+          <input type = "search" placeholder="Search" aria-label="Search" name = "searched">
+          <!-- This keeps the filter values while you search -->
+          {% for key, values in request.GET.lists %}
+            {% if key != 'searched' %}
+              {% for v in values %}
+                <input type = "hidden" name="{{ key }}" value = "{{ v }}">
+              {% endfor %}
+            {% endif %}
+          {% endfor %}
           <button class = "btn-outline-secondary" type = "submit">Search</button>
         </form>
       </div>

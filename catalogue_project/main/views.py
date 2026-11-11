@@ -9,23 +9,27 @@ def home(request):
     products = Product.objects.all()
 
     # filter data if there is any applied
-    # productFilter = productFilter(request.GET, queryset = products)
-    # products = productFilter.qs
+    productFilter = ProductFilter(request.GET, queryset = products)
+    products = productFilter.qs
 
     return render(request, "home.html", {"products" : products})
 
 def search(request):
     """search page"""
-    if request.method == "POST":
-        searched = request.POST['searched']
+    if request.method == "GET":
+        searched = request.GET['searched']
         # search product objects for if their name, category, tags,
         # or description contains the string searched
+        # filter data if there is any applied
         products = Product.objects.filter(Q(name__icontains=searched) |
-                                          Q(category__name__icontains=searched) |
                                           Q(description__icontains=searched))
+        
     else:
         searched = {}
         products = {}
+
+    productFilter = ProductFilter(request.GET, queryset = products)
+    products = productFilter.qs
     return render(request, "search_page.html", {"searched" : searched,
                                                 "products" : products})
 
